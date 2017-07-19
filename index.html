@@ -1,9 +1,9 @@
 <canvas id="area" width="500" height="500" style=" background-color: black">
 	
-	<script type="text/javascript"> 
+	<script> 
 		
 		var area = document.getElementById("area");
-		var context = area.getContext('2d');;
+		var context = area.getContext("2d");
 		var tileArea = area.width / 25;
 		var size = 0;
 		var keys = [];
@@ -12,17 +12,18 @@
 		var dirVector = {x: 1, y: 0};
 		
 		
-		window.addEventListener("keyup", function(e)
-		{
-			delete keys[e.keyCode];
-		
-		}, true);		
 		
 		window.addEventListener("keydown", function(e)
 		{
 			keys[e.keyCode] = true;
 		
 		}, true);
+		
+		window.addEventListener("keyup", function(e)
+		{
+			delete keys[e.keyCode];
+		
+		}, true);		
 		
 		setInterval(move, 1000/10);
 		function move() {
@@ -46,22 +47,21 @@
 			size++;
 			food.x = parseInt(Math.random() * 25);
 			food.y = parseInt(Math.random() * 25);
-			body.push({x:body[body.length - 1].x, y:body[body.length - 1].y});		
+			body.push({x: body[body.length - 1].x, y: body[body.length - 1].y});		
+			
 		}
 		
 		for (var k = 1; k < body.length; k++) {
 		
-			if(body[0].x == body[k].x && body[0].y == body[k].y) window.location.reload(false);		
-			
+			if(body[0].x == body[k].x && body[0].y == body[k].y) {
+			 window.location.reload(false);		
+			}
 		}
 		
-		if(body[0].x > 24 || body[0].y > 24 || body[0].x < 0 || body[0].y < 0) window.location.reload(false);		
-			
+		if(body[0].x > 24 || body[0].y > 24 || body[0].x < 0 || body[0].y < 0){
+		window.location.reload(false);		
+			}
 			context.clearRect(0, 0, area.width, area.heigth);
-			
-			context.fillStyle = "gray";
-			context.font = "60px Arial";
-			context.fillText(size, 10, 60);
 			
 			context.fillStyle = "green";
 			for(var i = 0; i < body.length; i++){
